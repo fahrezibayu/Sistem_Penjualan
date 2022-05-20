@@ -95,7 +95,7 @@
                                                 type="button" class="btn btn-icon btn-info btn-sm" onclick="detail_laporan('{{ $row->id_penjualan }}')">
                                                 <i class="fas fa-search"></i>
                                                 </button>
-                                            <a href="{{ url('/penjualan/laporan/print', $row->id_penjualan) }}" <button
+                                            <a href="{{ url('/penjualan/laporan/print_ulang', $row->id_penjualan) }}" <button
                                                 type="button" class="btn btn-success btn-sm">
                                                 <i class="fas fa-print"></i>
                                                 </button>

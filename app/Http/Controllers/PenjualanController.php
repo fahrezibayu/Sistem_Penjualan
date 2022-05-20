@@ -44,7 +44,7 @@ class PenjualanController extends Controller
             $huruf = $date;
             $kodepenjualan = $huruf . sprintf("%03s", $urutan);
 
-            return view('penjualan.v_pos', compact("barang", "total","kodepenjualan"));
+            return view('penjualan.v_pos', compact("barang", "total", "kodepenjualan"));
         }
     }
 
@@ -72,7 +72,6 @@ class PenjualanController extends Controller
         }
 
         return redirect("/penjualan/pos");
-
     }
 
     public function show_temp(Request $request)
@@ -87,7 +86,6 @@ class PenjualanController extends Controller
 
         PenjualanTemp::where('id', $id)->delete();
         return redirect("/penjualan/pos");
-
     }
 
     public function update_temp(Request $request)
@@ -133,12 +131,9 @@ class PenjualanController extends Controller
                 'harga_barang'      => $barang->harga_barang,
                 'total'             => $total
             ]);
-
         }
 
         DB::table('tbl_penjualan_temp')->truncate();
-
-        return redirect("/penjualan/pos");
 
     }
 
@@ -149,15 +144,12 @@ class PenjualanController extends Controller
         if (!Session::get('login')) {
 
             return redirect("/");
-
         } else {
 
-            $penjualan = Penjualan::where("tgl_penjualan",date("Y-m-d"))->get();
+            $penjualan = Penjualan::where("tgl_penjualan", date("Y-m-d"))->get();
 
             return view('penjualan.v_laporan', compact("penjualan"));
-
         }
-
     }
 
     public function search_laporan(Request $request)
@@ -172,12 +164,9 @@ class PenjualanController extends Controller
             $date1      = date('Y-m-d', strtotime($request->date1));
             $date2      = date('Y-m-d', strtotime($request->date2));
 
-            $penjualan      = Penjualan::whereBetween("tgl_penjualan",[$date1,$date2])->get();
-            return view('penjualan.v_laporan',compact("penjualan"));
-
+            $penjualan      = Penjualan::whereBetween("tgl_penjualan", [$date1, $date2])->get();
+            return view('penjualan.v_laporan', compact("penjualan"));
         }
-
-
     }
 
     public function detail_lap(Request $request)
@@ -185,11 +174,28 @@ class PenjualanController extends Controller
 
         $id         = $request->id;
 
-        $penjualan  = PenjualanTrn::where("id_penjualan",$id)->get();
-        return view("penjualan.v_detail_laporan",compact("penjualan"));
-
+        $penjualan  = PenjualanTrn::where("id_penjualan", $id)->get();
+        return view("penjualan.v_detail_laporan", compact("penjualan"));
     }
 
+    public function struk($id)
+    {
+        $id_penjualan = $id;
+        $penjualan = DB::table('tbl_penjualan')
+            ->where("id_penjualan", $id)
+            ->first();
+        $detail_penjualan = PenjualanTrn::where("id_penjualan", $id)->get();
 
+        return view("penjualan.struk.v_struk", compact("id_penjualan", "penjualan", "detail_penjualan"));
+    }
+    public function struk_ulang($id)
+    {
+        $id_penjualan = $id;
+        $penjualan = DB::table('tbl_penjualan')
+            ->where("id_penjualan", $id)
+            ->first();
+        $detail_penjualan = PenjualanTrn::where("id_penjualan", $id)->get();
 
+        return view("penjualan.struk.v_struk_ulang", compact("id_penjualan", "penjualan", "detail_penjualan"));
+    }
 }

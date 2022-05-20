@@ -142,7 +142,7 @@ function transaksi ()
             },
             type:'post',
             success:function(){
-                window.location.reload();
+                window.location = "laporan/print/"+id_penjualan;
             }
 
         })

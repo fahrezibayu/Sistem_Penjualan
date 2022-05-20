@@ -57,6 +57,8 @@ Route::post("/penjualan/update_temp", "App\Http\Controllers\PenjualanController@
 Route::post("/penjualan/show_temp", "App\Http\Controllers\PenjualanController@show_temp");
 Route::post("/penjualan/save_transaksi", "App\Http\Controllers\PenjualanController@save_transaksi");
 Route::get("/penjualan/laporan", "App\Http\Controllers\PenjualanController@laporan");
+Route::get("/penjualan/laporan/print_ulang/{id}", "App\Http\Controllers\PenjualanController@struk_ulang");
+Route::get("/penjualan/laporan/print/{id}", "App\Http\Controllers\PenjualanController@struk");
 Route::post("/penjualan/laporan/search", "App\Http\Controllers\PenjualanController@search_laporan");
 // Route::post("/penjualan/laporan/search/detail_lap", "App\Http\Controllers\PenjualanController@detail_lap");
 Route::post("/penjualan/laporan/detail_lap", "App\Http\Controllers\PenjualanController@detail_lap");
